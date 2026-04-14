@@ -68,5 +68,6 @@ For this room I'm working as the IT admin for THM Inc., managing
 the domain **THM.local** through a pre-configured Domain Controller. 
 Connected via RDP using admin credentials provided by the lab.
 
-<img width="1912" height="878" alt="Screenshot 2026-04-14 220725" src="https://github.com/user-attachments/assets/caccdd86-7341-40c6-a65e-f03adeb38e4e" />
+<img width="1911" height="908" alt="Screenshot 2026-04-14 220609" src="https://github.com/user-attachments/assets/d0de26d0-85e8-4385-b21f-2936d53d83f5" />
+
 
