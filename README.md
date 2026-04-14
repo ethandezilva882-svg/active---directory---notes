@@ -1,3 +1,5 @@
+
+
 # active---directory---notes
 
 ## Task 1 — Windows Domains
@@ -13,6 +15,7 @@ fix one person's account. That approach just doesn't scale.
 
 That's exactly the problem Windows Domains solve.
 
+<img width="1912" height="878" alt="Screenshot 2026-04-14 220725" src="https://github.com/user-attachments/assets/d1901f57-9ca1-4921-b639-8a9b98e4a9f5" />
 
 
 
@@ -64,3 +67,6 @@ across the whole network.
 For this room I'm working as the IT admin for THM Inc., managing 
 the domain **THM.local** through a pre-configured Domain Controller. 
 Connected via RDP using admin credentials provided by the lab.
+
+<img width="1912" height="878" alt="Screenshot 2026-04-14 220725" src="https://github.com/user-attachments/assets/caccdd86-7341-40c6-a65e-f03adeb38e4e" />
+
