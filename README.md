@@ -1,7 +1,9 @@
+ Active Directory Basics — TryHackMe
 
+> Documentation of my progress through the Active Directory Basics 
+> room on TryHackMe. Written in my own words as I work through each task.
 
-# active---directory---notes
-
+ 
 ## Task 1 — Windows Domains
 
 Imagine you're the IT guy for a small business with 5 computers and 
@@ -15,12 +17,10 @@ fix one person's account. That approach just doesn't scale.
 
 That's exactly the problem Windows Domains solve.
 
-<img width="1912" height="878" alt="Screenshot 2026-04-14 220725" src="https://github.com/user-attachments/assets/d1901f57-9ca1-4921-b639-8a9b98e4a9f5" />
 
 
 
-
-### So What is a Windows Domain?
+### So What is  Windows Domain?
 
 
 A Windows Domain is basically a way to group all your users and 
@@ -30,6 +30,9 @@ That central place is called **Active Directory (AD)**.
 The server that hosts and runs Active Directory is called a 
 **Domain Controller (DC)**. Think of it as the brain of the network 
 — everything goes through it.
+
+<img width="1912" height="878" alt="Screenshot 2026-04-14 220725" src="https://github.com/user-attachments/assets/d1901f57-9ca1-4921-b639-8a9b98e4a9f5" />
+
 
 
 ### Why Does This Matter?
