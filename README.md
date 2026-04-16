@@ -195,7 +195,7 @@ different purposes and this is a common point of confusion:
   they may need access to multiple different resources across the domain.
 
 
-  ## Task 3 — Managing OUs, Users and Delegation
+## Task 3 — Managing OUs, Users and Delegation
 
 ### The Scenario
 
@@ -220,8 +220,12 @@ right-click and delete it throws an error. To get around this:
 3. Uncheck **"Protect object from accidental deletion"**
 4. Now you can delete the OU — along with everything inside it
 
-<img width="1902" height="886" alt="Screenshot 2026-04-16 123452" src="https://github.com/user-attachments/assets/a16575d4-1bba-4c38-9b94-665e480f1101" />
 
+<img width="499" height="198" alt="Screenshot 2026-04-16 214647" src="https://github.com/user-attachments/assets/45bfb100-dcb3-4c38-8820-c52409a6c591" />
+
+<img width="935" height="516" alt="Screenshot 2026-04-16 214701" src="https://github.com/user-attachments/assets/6b7b0219-1281-4475-9b20-e16ba8349238" />
+
+<img width="492" height="570" alt="Screenshot 2026-04-16 214717" src="https://github.com/user-attachments/assets/bcd94a7a-6c61-4703-a651-7c1bc6ad9db6" />
 
 
 ### Adjusting Users
