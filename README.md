@@ -194,6 +194,92 @@ different purposes and this is a common point of confusion:
   they may need access to multiple different resources across the domain.
 
 
+  ## Task 3 — Managing OUs, Users and Delegation
+
+### The Scenario
+
+As the new domain administrator for THM Inc., the first job was to audit
+the existing AD structure and bring it in line with the company's current
+organisational chart. This meant cleaning up outdated OUs, adjusting users
+across departments, and setting up delegation for the IT support team.
+
+---
+
+### Deleting OUs
+
+The first thing I noticed was an extra department OU in AD that no longer
+exists in the business — removed due to budget cuts. Deleting it wasn't
+straightforward though.
+
+By default, OUs are protected against accidental deletion. Trying to
+right-click and delete it throws an error. To get around this:
+
+1. Go to **View → Enable Advanced Features** in AD Users and Computers
+2. Right-click the OU → **Properties → Object tab**
+3. Uncheck **"Protect object from accidental deletion"**
+4. Now you can delete the OU — along with everything inside it
+
+> 📸 Add screenshot of the deletion error here
+
+> 📸 Add screenshot of the Object tab with the checkbox here
+
+---
+
+### Adjusting Users
+
+After removing the extra OU, the next step was making sure the users
+inside each department OU matched the organisational chart. This involved
+creating new users where they were missing and deleting ones that no
+longer belonged.
+
+> 📸 Add screenshot of the updated OU structure here
+
+---
+
+### Delegation
+
+Delegation in AD lets you give a specific user control over an OU without
+making them a full Domain Admin. This is useful for things like letting
+IT support reset passwords without having access to everything else.
+
+In this case, Phillip from IT support was delegated control over the
+Sales, Marketing and Management OUs — specifically the ability to reset
+passwords.
+
+**Steps to delegate control:**
+1. Right-click the OU → **Delegate Control**
+2. Add the user (type the name and hit **Check Names** to autocomplete)
+3. Select the task to delegate — in this case **Reset user passwords**
+4. Confirm and finish
+
+> 📸 Add screenshot of the Delegate Control window here
+
+---
+
+### Testing Delegation via PowerShell
+
+Since Phillip doesn't have access to AD Users and Computers, password
+resets have to be done through PowerShell. Used the following commands
+logged in as Phillip via RDP:
+
+**Reset Sophie's password:**
+```powershell
+Set-ADAccountPassword sophie -Reset -NewPassword (Read-Host -AsSecureString -Prompt 'New Password') -Verbose
+```
+
+**Force password change on next login:**
+```powershell
+Set-ADUser -ChangePasswordAtLogon $true -Identity sophie -Verbose
+```
+
+After resetting the password, logged into Sophie's account via RDP
+and retrieved the flag from her desktop.
+
+> 📸 Add screenshot of the PowerShell commands here
+
+> 📸 Add screenshot of Sophie's desktop flag here
+
+
   
 
 
