@@ -1,3 +1,4 @@
+
  Active Directory Basics — TryHackMe
 
 > Documentation of my progress through the Active Directory Basics 
@@ -219,11 +220,9 @@ right-click and delete it throws an error. To get around this:
 3. Uncheck **"Protect object from accidental deletion"**
 4. Now you can delete the OU — along with everything inside it
 
-> 📸 Add screenshot of the deletion error here
+<img width="1902" height="886" alt="Screenshot 2026-04-16 123452" src="https://github.com/user-attachments/assets/a16575d4-1bba-4c38-9b94-665e480f1101" />
 
-> 📸 Add screenshot of the Object tab with the checkbox here
 
----
 
 ### Adjusting Users
 
@@ -232,7 +231,8 @@ inside each department OU matched the organisational chart. This involved
 creating new users where they were missing and deleting ones that no
 longer belonged.
 
-> 📸 Add screenshot of the updated OU structure here
+<img width="1902" height="886" alt="Screenshot 2026-04-16 123452" src="https://github.com/user-attachments/assets/312a9e8b-f978-46a0-aa94-87094700af34" />
+
 
 ---
 
@@ -252,7 +252,8 @@ passwords.
 3. Select the task to delegate — in this case **Reset user passwords**
 4. Confirm and finish
 
-> 📸 Add screenshot of the Delegate Control window here
+<img width="1884" height="898" alt="Screenshot 2026-04-16 123027" src="https://github.com/user-attachments/assets/ed6b9717-d924-4ac7-a99d-8dbe89aa6e6a" />
+
 
 ---
 
@@ -275,10 +276,10 @@ Set-ADUser -ChangePasswordAtLogon $true -Identity sophie -Verbose
 After resetting the password, logged into Sophie's account via RDP
 and retrieved the flag from her desktop.
 
-> 📸 Add screenshot of the PowerShell commands here
 
-> 📸 Add screenshot of Sophie's desktop flag here
+<img width="1857" height="784" alt="Screenshot 2026-04-16 131722" src="https://github.com/user-attachments/assets/2696fc82-0e9f-4e61-8e1d-3610cf621740" />
 
+<img width="1912" height="902" alt="Screenshot 2026-04-16 214402" src="https://github.com/user-attachments/assets/354cad75-4d6f-40a1-92d1-6a09b8e0fc12" />
 
   
 
