@@ -122,7 +122,7 @@ Key things to know about machine accounts:
   <img width="1919" height="869" alt="Screenshot 2026-04-15 114734" src="https://github.com/user-attachments/assets/36d8c5b5-5307-4a74-bef8-4e9e95172bf6" />
 
 
-  ### Security Groups
+### Security Groups
 
 Instead of assigning permissions to users one by one, security groups let
 you manage access at scale. You add users to a group and they automatically
