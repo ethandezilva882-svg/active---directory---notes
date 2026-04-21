@@ -347,6 +347,8 @@ for each device type without affecting the others.
 
 <img width="907" height="825" alt="Screenshot 2026-04-22 133746" src="https://github.com/user-attachments/assets/756d8389-bedb-40ca-8498-5056a371e8ec" />
 
+
+
 <img width="915" height="919" alt="Screenshot 2026-04-22 133730" src="https://github.com/user-attachments/assets/fc355830-948f-4c42-9f66-fa7ac1f73d8a" />
 
 
