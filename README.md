@@ -285,6 +285,68 @@ and retrieved the flag from her desktop.
 
 <img width="1912" height="902" alt="Screenshot 2026-04-16 214402" src="https://github.com/user-attachments/assets/354cad75-4d6f-40a1-92d1-6a09b8e0fc12" />
 
-  
+
+
+
+## Task 4 — Managing Computers in AD
+
+### The Problem with Default Computer Placement
+
+By default, every machine that joins the domain (except Domain Controllers)
+gets dumped into a container called **Computers**. This works fine at small
+scale but becomes a problem when you need to apply different policies to
+different types of machines — you can't do that if everything is sitting
+in the same container.
+
+<img width="1804" height="861" alt="Screenshot 2026-04-22 131824" src="https://github.com/user-attachments/assets/ebcef270-44f9-4040-91af-8ec7f51e5c1f" />
+
+
+---
+
+### The Three Categories of Machines
+
+**Workstations**
+The most common device type in any domain. These are the day-to-day
+machines that regular users log into for work and browsing. No privileged
+accounts should ever be signed into a workstation.
+
+**Servers**
+The second most common device type. Servers exist to provide services
+to users or other servers on the network. They require different policies
+compared to regular workstations.
+
+**Domain Controllers**
+The most sensitive machines in the entire network. DCs store hashed
+passwords for every user account in the domain, making them the highest
+priority target for attackers. Windows automatically creates an OU for
+these — they don't go in the Computers container.
+
+---
+
+### Organising the Computers
+
+To apply proper policies to each device type, two new OUs were created
+directly under the **thm.local** domain:
+
+- **Workstations** — for all personal computers and laptops
+- **Servers** — for all server machines
+
+Domain Controllers already have their own default OU created by Windows.
+
+<img width="1827" height="914" alt="Screenshot 2026-04-22 132746" src="https://github.com/user-attachments/assets/6d7d8c2a-5fca-4a70-9acf-2bc3d4a91115" />
+
+
+After creating the OUs, all machines were moved out of the default
+Computers container and into their appropriate OU:
+
+- Personal computers and laptops → **Workstations OU**
+- Servers → **Servers OU**
+
+This separation means policies can now be configured independently
+for each device type without affecting the others.
+
+<img width="907" height="825" alt="Screenshot 2026-04-22 133746" src="https://github.com/user-attachments/assets/756d8389-bedb-40ca-8498-5056a371e8ec" />
+
+<img width="915" height="919" alt="Screenshot 2026-04-22 133730" src="https://github.com/user-attachments/assets/fc355830-948f-4c42-9f66-fa7ac1f73d8a" />
 
 
