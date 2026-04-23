@@ -1,4 +1,4 @@
-<img width="1650" height="906" alt="Screenshot 2026-04-23 205518" src="https://github.com/user-attachments/assets/4f639f4a-cb15-480f-bcda-6392e9d560f6" />
+
  Active Directory Basics — TryHackMe
 
 > Documentation of my progress through the Active Directory Basics 
