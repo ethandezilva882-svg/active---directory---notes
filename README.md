@@ -1,4 +1,4 @@
-
+<img width="1650" height="906" alt="Screenshot 2026-04-23 205518" src="https://github.com/user-attachments/assets/4f639f4a-cb15-480f-bcda-6392e9d560f6" />
  Active Directory Basics — TryHackMe
 
 > Documentation of my progress through the Active Directory Basics 
@@ -352,3 +352,143 @@ for each device type without affecting the others.
 <img width="915" height="919" alt="Screenshot 2026-04-22 133730" src="https://github.com/user-attachments/assets/fc355830-948f-4c42-9f66-fa7ac1f73d8a" />
 
 
+
+
+## Task 6<img width="816" height="913" alt="Screenshot 2026-04-23 204557" src="https://github.com/user-attachments/assets/96bd8d81-86f8-43a5-ac9a-e98bd14fdee3" />
+ — Group Policy Objects (GPOs)
+
+### What are GPOs?
+
+Up until now, OUs have just been used to organise users and machines.
+The real purpose of OUs is to allow different policies to be applied
+to different groups of people and devices. This is done through
+**Group Policy Objects (GPOs)**.
+
+A GPO is essentially a collection of settings that gets applied to
+an OU. GPOs can target either users or computers — or both — allowing
+admins to enforce specific configurations and security baselines
+across the domain without touching each machine individually.
+
+---
+
+### Group Policy Management Tool
+
+GPOs are managed through the **Group Policy Management** tool,
+accessible from the start menu on the Domain Controller. Opening it
+shows the full OU hierarchy and any existing GPOs already in place.
+
+In the THM lab, three GPOs already exist by default:
+
+- **Default Domain Policy** — linked to the entire thm.local domain
+- **RDP Policy** — also linked to the entire thm.local domain
+- **Default Domain Controllers Policy** — linked only to the Domain Controllers OU
+
+An important thing to note: any GPO applied to an OU automatically
+applies to all child OUs underneath it as well. So the Default Domain
+Policy affects every single OU in the domain including Sales, Marketing
+and so on.
+
+<img width="816" height="913" alt="Screenshot 2026-04-23 204557" src="https://github.com/user-attachments/assets/8b4c5fea-b8a3-4525-b7ac-e6e12129a6e4" />
+
+
+---
+
+### Inside a GPO
+
+Each GPO has two main tabs worth knowing:
+
+- **Scope** — shows where the GPO is linked in AD and what users
+  or computers it applies to. By default GPOs apply to all
+  **Authenticated Users**, meaning every user and PC in the linked OU.
+
+- **Settings** — shows the actual configurations the GPO enforces.
+  Settings are split into Computer Configurations and User Configurations.
+
+
+---
+
+### Editing a GPO — Password Policy
+
+To demonstrate how GPO editing works, the minimum password length
+policy was changed to require at least 10 characters for all users.
+
+Path to the setting:
+**Computer Configuration → Policies → Windows Settings → Security
+Settings → Account Policies → Password Policy**
+
+<img width="1650" height="906" alt="Screenshot 2026-04-23 205518" src="https://github.com/user-attachments/assets/33f16159-344b-4adc-a7e2-b0d9432692a5" />
+
+---
+
+### How GPOs Are Distributed
+
+GPOs are pushed out to the network through a shared folder called
+**SYSVOL**, stored on the Domain Controller at:
+`C:\Windows\SYSVOL\sysvol\`
+
+All domain users have access to this share and sync their GPOs
+periodically. Changes can take up to 2 hours to propagate across
+the domain. To force an immediate update on any machine, run:
+
+```powershell
+gpupdate /force
+```
+
+---
+
+### GPOs Created for THM Inc.
+
+Two GPOs were created and configured as part of this task:
+
+---
+
+#### 1. Restrict Control Panel Access
+
+**Goal:** Block all non-IT users from accessing the Control Panel.
+
+**Setting used:**
+User Configuration → Policies → Administrative Templates → Control Panel
+→ **Prohibit access to Control Panel and PC settings** — set to Enabled
+
+**Linked to:** Sales, Marketing and Management OUs
+
+This means IT users are unaffected and retain full access, while
+everyone else gets blocked from changing system settings.
+
+<img width="1660" height="905" alt="Screenshot 2026-04-23 212014" src="https://github.com/user-attachments/assets/a37ba96c-eb60-4a63-8553-5433121b87ae" />
+
+
+---
+
+#### 2. Auto Lock Screen
+
+**Goal:** Automatically lock workstations and servers after 5 minutes
+of inactivity to prevent unsupervised sessions being left open.
+
+**Setting used:**
+Computer Configuration → Policies → Windows Settings → Security Settings
+→ Local Policies → Security Options
+→ **Interactive logon: Machine inactivity limit** — set to 300 seconds
+
+**Linked to:** Root domain (thm.local) so it cascades down to
+Workstations, Servers and Domain Controllers OUs automatically.
+
+Note: OUs containing only users like Sales or Marketing will ignore
+the Computer Configuration settings, so there's no conflict.
+
+<img width="1615" height="901" alt="Screenshot 2026-04-23 212849" src="https://github.com/user-attachments/assets/976ff0da-436d-4062-9b7f-880161ab4dc0" />
+
+
+---
+
+### Verification
+
+Logged in as Mark from the Marketing department via RDP using
+THM\Mark to verify the GPOs were working correctly.
+
+- Attempting to open the Control Panel returned an access denied
+  message — confirming the restriction GPO was applied correctly.
+- Screen auto-lock after 5 minutes of inactivity also confirmed
+  the Auto Lock Screen GPO was working as expected.
+
+<img width="1652" height="906" alt="Screenshot 2026-04-23 210034" src="https://github.com/user-attachments/assets/f5d3a9dd-36f7-4164-8ad9-57a504b678bc" />
