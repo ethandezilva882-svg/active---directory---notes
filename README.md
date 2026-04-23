@@ -354,8 +354,7 @@ for each device type without affecting the others.
 
 
 
-## Task 6<img width="816" height="913" alt="Screenshot 2026-04-23 204557" src="https://github.com/user-attachments/assets/96bd8d81-86f8-43a5-ac9a-e98bd14fdee3" />
- — Group Policy Objects (GPOs)
+## Task 6 — Group Policy Objects (GPOs)
 
 ### What are GPOs?
 
