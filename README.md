@@ -354,7 +354,9 @@ for each device type without affecting the others.
 
 
 
-## Task 6 — Group Policy Objects (GPOs)
+
+
+## Task 5 — Group Policy Objects (GPOs)
 
 ### What are GPOs?
 
