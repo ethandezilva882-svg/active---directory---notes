@@ -389,7 +389,8 @@ applies to all child OUs underneath it as well. So the Default Domain
 Policy affects every single OU in the domain including Sales, Marketing
 and so on.
 
-<img width="816" height="913" alt="Screenshot 2026-04-23 204557" src="https://github.com/user-attachments/assets/8b4c5fea-b8a3-4525-b7ac-e6e12129a6e4" />
+<img width="1662" height="897" alt="Screenshot 2026-04-24 105251" src="https://github.com/user-attachments/assets/15e2647c-2eaf-4c20-90ce-3d1abddd77b5" />
+
 
 
 ---
