@@ -494,3 +494,101 @@ THM\Mark to verify the GPOs were working correctly.
   the Auto Lock Screen GPO was working as expected.
 
 <img width="1652" height="906" alt="Screenshot 2026-04-23 210034" src="https://github.com/user-attachments/assets/f5d3a9dd-36f7-4164-8ad9-57a504b678bc" />
+
+
+
+## Task 5 — Authentication: Kerberos and NetNTLM
+
+### How Authentication Works in a Domain
+
+In a Windows domain, credentials are stored on the Domain Controller.
+Every time a user tries to access a service, that service checks with
+the Domain Controller to verify the credentials are valid. There are
+two protocols that handle this:
+
+- **Kerberos** — the default protocol used by any modern version of Windows
+- **NetNTLM** — a legacy protocol kept around for compatibility
+
+Most networks still have both enabled even though NetNTLM is considered
+outdated at this point.
+
+---
+
+### Kerberos Authentication
+
+Kerberos works using a ticket system. Instead of passing credentials
+every time a user wants to access something, they get a ticket after
+their first login that proves they've already been authenticated.
+That ticket gets presented to services instead of a password.
+
+**Here's how the full process works:**
+
+**Step 1 — Getting a Ticket Granting Ticket (TGT)**
+
+The user sends their username and an encrypted timestamp to the
+**Key Distribution Center (KDC)**, which runs on the Domain Controller.
+The KDC responds with a **Ticket Granting Ticket (TGT)** and a
+**Session Key**.
+
+The TGT is encrypted using the **krbtgt account's password hash**
+so the user can't read its contents. The Session Key is what the
+user needs to make further requests.
+
+   <img width="669" height="225" alt="Screenshot 2026-04-27 215747" src="https://github.com/user-attachments/assets/f19cf52a-6633-443c-b7e0-6ce0e6113613" />
+
+**Step 2 — Getting a Ticket Granting Service (TGS)**
+
+When the user wants to access a specific service — a file share,
+website or database — they use their TGT to request a
+**Ticket Granting Service (TGS)** from the KDC. They also provide
+a **Service Principal Name (SPN)** which identifies the exact service
+they want to reach.
+
+The KDC returns a TGS encrypted using the **Service Owner's password
+hash**, along with a **Service Session Key**.
+
+<img width="658" height="277" alt="Screenshot 2026-04-27 215907" src="https://github.com/user-attachments/assets/ad74ad72-9562-4ded-8292-0c4fdea47073" />
+
+**Step 3 — Accessing the Service**
+
+The user sends the TGS to the actual service. The service decrypts
+it using its own account's password hash, validates the Service
+Session Key, and grants access.
+
+<img width="653" height="220" alt="Screenshot 2026-04-27 215926" src="https://github.com/user-attachments/assets/f19cb861-917d-449a-8e28-b11e2d2d77e0" />
+
+---
+
+### NetNTLM Authentication
+
+NetNTLM uses a **challenge-response** mechanism rather than tickets.
+The user's password is never sent across the network directly.
+
+**The process:**
+
+1. Client sends an authentication request to the server
+2. Server generates a random number and sends it as a **challenge**
+3. Client combines their NTLM password hash with the challenge
+   to produce a **response** and sends it back
+4. Server forwards both the challenge and response to the
+   Domain Controller
+5. Domain Controller recalculates the expected response and
+   compares it — if they match, access is granted
+6. Result is sent back to the server and then to the client
+
+<img width="1310" height="759" alt="Screenshot 2026-04-27 215951" src="https://github.com/user-attachments/assets/47186de5-9783-460d-9207-5b25118ec010" />
+
+One key difference: if a **local account** is used instead of a
+domain account, the server can verify the response itself using
+its local SAM database — no Domain Controller involvement needed.
+
+---
+
+### Key Differences
+
+| | Kerberos | NetNTLM |
+|---|---|---|
+| Type | Ticket-based | Challenge-response |
+| Default in modern Windows | Yes | No |
+| Password sent over network | Never | Never |
+| Status | Current standard | Legacy |
