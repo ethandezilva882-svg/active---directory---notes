@@ -592,3 +592,84 @@ its local SAM database — no Domain Controller involvement needed.
 | Default in modern Windows | Yes | No |
 | Password sent over network | Never | Never |
 | Status | Current standard | Legacy |
+
+
+
+## Task 7 — Trees, Forests and Trust Relationships
+
+### Beyond a Single Domain
+
+A single domain works fine for a small organisation but as businesses
+grow, the network needs to scale with it. Different countries, different
+regulations, different IT teams — managing all of that under one domain
+becomes messy and error prone. Active Directory solves this by supporting
+multiple domains that can be linked together.
+
+---
+
+### Trees
+
+If a company expands into a new country, that new branch might have
+completely different laws and compliance requirements. Rather than
+cramming everything into one domain with a complex OU structure,
+the network can be split into a **Tree**.
+
+A Tree is formed when two or more domains share the same namespace
+and are joined together. For example, if **thm.local** expanded into
+UK and US branches, the tree would look like this:
+
+- **thm.local** — root domain
+- **uk.thm.local** — UK branch
+- **us.thm.local** — US branch
+
+Each subdomain has its own Domain Controller, its own users and its
+own computers. The UK IT team manages UK resources only and has no
+control over the US domain, and vice versa.
+
+> <img width="1072" height="846" alt="Screenshot 2026-04-30 221641" src="https://github.com/user-attachments/assets/372ccce2-aeed-4255-b8c1-98cb2b613419" />
+
+
+---
+
+### Enterprise Admins
+
+When trees are involved, a new security group becomes relevant —
+**Enterprise Admins**. This group has administrative privileges
+across every domain in the entire enterprise, sitting above the
+regular Domain Admins who only control their own single domain.
+
+---
+
+### Forests
+
+If the company acquires another business with a completely different
+domain namespace — say **MHT Inc.** running **mht.local** — the two
+separate trees can still be connected. The union of multiple trees
+with different namespaces under the same network is called a **Forest**.
+
+><img width="1594" height="610" alt="Screenshot 2026-04-30 221853" src="https://github.com/user-attachments/assets/0d576b3c-f08f-464c-a8ca-8d09c9067e86" />
+
+---
+
+### Trust Relationships
+
+Trees and forests give you a clean, compartmentalised network but
+at some point users in one domain will need to access resources in
+another. This is handled through **Trust Relationships**.
+
+**One-way trust:**
+Domain AAA trusts Domain BBB — users from BBB can be authorised
+to access resources in AAA. The trust direction and the access
+direction are opposite to each other.
+
+**Two-way trust:**
+Both domains mutually trust each other. When domains are joined
+into a tree or forest, a two-way trust is set up by default.
+
+<img width="1199" height="477" alt="Screenshot 2026-04-30 221935" src="https://github.com/user-attachments/assets/b56b5b48-cdb9-4967-a81e-74937105a7b1" />
+
+
+One important distinction — a trust relationship doesn't
+automatically give users access to everything on the other domain.
+It just opens the possibility of granting access. What actually
+gets authorised is still up to the administrator to configure.
