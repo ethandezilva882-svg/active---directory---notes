@@ -1,4 +1,3 @@
-
  Active Directory Basics — TryHackMe
 
 > Documentation of my progress through the Active Directory Basics 
@@ -21,7 +20,7 @@ That's exactly the problem Windows Domains solve.
 
 
 
-### So What is  Windows Domain?
+### What is a Windows Domain?
 
 
 A Windows Domain is basically a way to group all your users and 
@@ -220,6 +219,8 @@ right-click and delete it throws an error. To get around this:
 3. Uncheck **"Protect object from accidental deletion"**
 4. Now you can delete the OU — along with everything inside it
 
+> 📸 Add screenshot of the Object tab with the checkbox unchecked here
+
 
 <img width="499" height="198" alt="Screenshot 2026-04-16 214647" src="https://github.com/user-attachments/assets/45bfb100-dcb3-4c38-8820-c52409a6c591" />
 
@@ -356,7 +357,7 @@ for each device type without affecting the others.
 
 
 
-## Task 5 — Group Policy Objects (GPOs)
+## Task 6 — Group Policy Objects (GPOs)
 
 ### What are GPOs?
 
@@ -458,6 +459,8 @@ This means IT users are unaffected and retain full access, while
 everyone else gets blocked from changing system settings.
 
 <img width="1660" height="905" alt="Screenshot 2026-04-23 212014" src="https://github.com/user-attachments/assets/a37ba96c-eb60-4a63-8553-5433121b87ae" />
+
+> 📸 Add screenshot of the GPO linked to Sales, Marketing and Management OUs here
 
 
 ---
@@ -673,3 +676,16 @@ One important distinction — a trust relationship doesn't
 automatically give users access to everything on the other domain.
 It just opens the possibility of granting access. What actually
 gets authorised is still up to the administrator to configure.
+
+---
+
+## Summary
+
+This room covered the core fundamentals of Active Directory — from understanding
+why domains exist, to managing users, machines and OUs, to enforcing security
+policy through GPOs, and finally to how authentication works under the hood
+with Kerberos and NetNTLM. The final tasks covered how AD scales across
+multiple domains using trees, forests and trust relationships. These concepts
+form the foundation of almost every enterprise Windows environment and are
+directly relevant to SOC, helpdesk and sysadmin roles.
+
